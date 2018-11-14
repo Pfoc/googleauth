@@ -1,7 +1,11 @@
 {
   "name": "pfoc/googleauth",
-  "description": "Google Auth Module",
-  "type": "magento2-component",
+  "description": "Modules allow login to Magento 2 administration panel by G Suite Account",
+  "type": "magento2-module",
+  "require": {
+    "php": "~7.1.0",
+    "magento/framework": "*"
+  },
   "homepage": "https://github.com/Pfoc/googleauth",
   "version": "0.1.0",
   "license": [
