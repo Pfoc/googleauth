@@ -6,7 +6,7 @@ Modules allow login to Magento 2 administration panel by G Suite Account.
 # Install
 
 ```bash
-
+composer require pfoc/googleauth
 ```
 
 # Configuration
