@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<config>
+    <preference for="Magento\Backend\Model\Auth\Credential\StorageInterface" type="Pfoc\GoogleAuth\Rewrite\User\Model\User" />
+    <preference for="Magento\User\Model\ResourceModel\User" type="Pfoc\GoogleAuth\Rewrite\User\Model\ResourceModel\User" />
+</config>

@@ -1,0 +1,64 @@
+<?php if ($this->isEnable()):?>
+    <div id="signin-button"></div>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script type="text/javascript">
+        require([
+            "jquery",
+            "jquery/ui"
+        ], function($v){
+            $v = jQuery.noConflict();
+            $v(document).ready(function()
+            {
+                gapi.load('auth2', function() {
+                    auth2 = gapi.auth2.init({
+                        client_id: '<?php echo $this->getGoogleClientId()?>',
+                        scope: 'email'
+                    });
+
+                    auth2.attachClickHandler('signin-button', {}, onSuccess, onFailure);
+                });
+
+                gapi.signin2.render('signin-button', {
+                    'scope': 'profile email',
+                    'width': 210,
+                    'height': 45,
+                    'longtitle': true,
+                    'theme': 'dark'
+                });
+
+                function onFailure(msg) {
+                    //TODO:: handle it!
+                }
+
+                function onSuccess(googleUser) {
+                    var token = googleUser.getAuthResponse().id_token;
+                    $v.ajax({
+                        showLoader: true,
+                        type: 'POST',
+                        dataType: "json",
+                        data: {"token": token},
+                        url: '<?php echo $this->getGoogleAuthUrl() ?>',
+                        success: function(result) {
+                            window.location.reload();
+                        },
+                        error: function (result) {
+                            //TODO:: display message: result.statusText
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <style type="text/css">
+        #signin-button {
+            width: 210px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+    </style>
+<?php endif; ?>
+
+
+
+
+
